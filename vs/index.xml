@@ -1,13 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vs on Bento</title>
-    <link>https://kimsinjeong.github.io/vs/</link>
+    <link>/vs/</link>
     <description>Recent content in Vs on Bento</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>MIT</copyright>
     
-        <atom:link href="https://kimsinjeong.github.io/vs/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/vs/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
