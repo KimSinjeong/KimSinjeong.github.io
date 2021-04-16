@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://www.example.com/</loc>
+    <loc>https://kimsinjeong.github.io/</loc>
   </url><url>
-    <loc>https://www.example.com/bento-hugo-theme/</loc>
+    <loc>https://kimsinjeong.github.io/bento-hugo-theme/</loc>
   </url><url>
-    <loc>https://www.example.com/categories/</loc>
+    <loc>https://kimsinjeong.github.io/categories/</loc>
   </url><url>
-    <loc>https://www.example.com/tags/</loc>
+    <loc>https://kimsinjeong.github.io/tags/</loc>
   </url><url>
-    <loc>https://www.example.com/true/</loc>
+    <loc>https://kimsinjeong.github.io/true/</loc>
   </url><url>
-    <loc>https://www.example.com/ua-xxxxxx-yy/</loc>
+    <loc>https://kimsinjeong.github.io/ua-xxxxxx-yy/</loc>
   </url><url>
-    <loc>https://www.example.com/vs/</loc>
+    <loc>https://kimsinjeong.github.io/vs/</loc>
   </url>
 </urlset>
