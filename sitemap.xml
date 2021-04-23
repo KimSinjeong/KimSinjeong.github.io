@@ -3,17 +3,5 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/</loc>
-  </url><url>
-    <loc>/bento-hugo-theme/</loc>
-  </url><url>
-    <loc>/categories/</loc>
-  </url><url>
-    <loc>/tags/</loc>
-  </url><url>
-    <loc>/true/</loc>
-  </url><url>
-    <loc>/ua-xxxxxx-yy/</loc>
-  </url><url>
-    <loc>/vs/</loc>
   </url>
 </urlset>
