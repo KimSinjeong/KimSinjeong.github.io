@@ -31,20 +31,20 @@ organizations:
 # Need to use another icon? Simply download the SVG icon to your `assets/media/icons/` folder.
 profiles:
   - icon: at-symbol
-    url: 'mailto:your-email@example.com'
+    url: 'mailto:shinjeong.kim.99@gmail.com'
     label: E-mail Me
   - icon: brands/x
     url: https://twitter.com/GetResearchDev
-  - icon: brands/instagram
-    url: https://www.instagram.com/
+  # - icon: brands/instagram
+    # url: https://www.instagram.com/
   - icon: brands/github
     url: https://github.com/KimSinjeong
   - icon: brands/linkedin
-    url: https://www.linkedin.com/
+    url: https://www.linkedin.com/in/shinjeongkim
   - icon: academicons/google-scholar
-    url: https://scholar.google.com/
+    url: https://scholar.google.com/citations?user=V8mY8rUAAAAJ
   - icon: academicons/orcid
-    url: https://orcid.org/
+    url: https://orcid.org/0000-0002-3199-4111
 
 interests:
   - 3D Vision
@@ -56,10 +56,10 @@ education:
     date_start: 2022-08-16
     date_end: 2024-09-30
     summary: |
-      Thesis on _Why LLMs are awesome_. Supervised by [Prof Joe Smith](https://example.com). Presented papers at 5 IEEE conferences with the contributions being published in 2 Springer journals.
-    button:
-      text: 'Read Thesis'
-      url: 'https://example.com'
+      Thesis on _Fully Differentiable Global Structure from Motion_. Supervised by [Dr. Daniel Barath](https://inf.ethz.ch/people/people-atoz/person-detail.Mjg0NzIz.TGlzdC8zMDQsLTIxNDE4MTU0NjA=.html) and [Prof. Dr. Marc Pollefeys](https://inf.ethz.ch/people/person-detail.pollefeys.html).
+    # button:
+    #   text: 'Read Thesis'
+    #   url: 'https://example.com'
   - area: BSc Computer Science
     institution: KAIST
     date_start: 2017-01-20
@@ -157,4 +157,6 @@ awards:
 
 ## About Me
 
-Chien Shiung Wu is a professor of artificial intelligence at the Stanford AI Lab. Her research interests include distributed robotics, mobile computing and programmable matter. She leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
+I am a master student in Computer Science at ETH Zurich. I am interested in geometric computer vision (a.k.a 3D vision), feature extraction, and robot vision.
+
+As an undergraduate researcher, I participated in research projects on Weakly-supervised Semantic Segmentation, Self-supervised Event Feature Embedding, and Geometry-aware keypoint descriptor at [Visual Intelligence Lab. @ KAIST](http://vi.kaist.ac.kr/) (PI: [Prof. Kukjin Yoon](https://sites.google.com/site/kjyoon/)). I also previously worked as an undergraduate researcher at [Neuro-Machine Augmented Intelligence Laboratory @ KAIST](http://nmail.kaist.ac.kr/wordpress/) (PI: [Prof. Sungho Jo](http://nmail.kaist.ac.kr/wordpress/index.php/professor-jo-sungho/)).
