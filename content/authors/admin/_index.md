@@ -56,7 +56,7 @@ education:
     date_start: 2022-08-16
     date_end: 2024-09-30
     summary: |
-      Thesis on _Fully Differentiable Global Structure from Motion_. Supervised by [Dr. Daniel Barath](https://inf.ethz.ch/people/people-atoz/person-detail.Mjg0NzIz.TGlzdC8zMDQsLTIxNDE4MTU0NjA=.html) and [Prof. Dr. Marc Pollefeys](https://inf.ethz.ch/people/person-detail.pollefeys.html).
+      Thesis on _Fully Differentiable Global Structure from Motion_. Supervised by Dr. Daniel Barath and Prof. Dr. Marc Pollefeys.
     # button:
     #   text: 'Read Thesis'
     #   url: 'https://example.com'
@@ -65,9 +65,7 @@ education:
     date_start: 2017-01-20
     date_end: 2022-08-31
     summary: |
-      GPA: 4.22/4.30
-
-      Class Topper among 2022 Fall Graduates
+      Class Topper among 2022 Fall Graduates (GPA: 4.22/4.30)
 work:
   - position: Research and Development Intern
     company_name: NAVER
@@ -77,9 +75,9 @@ work:
     date_end: 2019-08-18
     summary: |2-
       Responsibilities include:
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
-      - lorem ipsum dolor sit amet, consectetur adipiscing elit
+      - Analyzed causality between each field of advertisement data and user impression.
+      - Trained neural networks to learn font representation that considers the influence on user impression.
+      - Improved performance of online market product category classification models.
 
 # Skills
 # Add your own SVG icons to `assets/media/icons/`
@@ -118,10 +116,8 @@ skills:
 languages:
   - name: English
     percent: 100
-  - name: Chinese
-    percent: 75
-  - name: Portuguese
-    percent: 25
+  - name: Korean
+    percent: 100
 
 # Awards.
 #   Add/remove as many awards below as you like.
