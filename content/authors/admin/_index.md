@@ -54,7 +54,7 @@ education:
   - area: MSc Computer Science
     institution: ETH Zürich
     date_start: 2022-08-16
-    date_end: 2024-09-31
+    date_end: 2024-09-30
     summary: |
       Thesis on _Why LLMs are awesome_. Supervised by [Prof Joe Smith](https://example.com). Presented papers at 5 IEEE conferences with the contributions being published in 2 Springer journals.
     button:
