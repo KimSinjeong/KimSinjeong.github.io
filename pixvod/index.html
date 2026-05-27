@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <title>PixVOD: Pixel-Distributed Direct Visual Odometry and Depth Estimation</title>
+  <meta name="description"
+        content="PixVOD is a fully pixel-parallel formulation of direct visual odometry and depth estimation. Pixel processors exchange Gaussian Belief Propagation messages to reach consensus on 6-DoF camera motion and per-pixel depth — entirely on-sensor." />
+
+  <!-- Open Graph / social -->
+  <meta property="og:title" content="PixVOD: Pixel-Distributed Direct Visual Odometry and Depth Estimation" />
+  <meta property="og:description"
+        content="Pixel-distributed 6-DoF visual odometry and per-pixel depth via Gaussian Belief Propagation across a Pixel Processor Array." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="./static/images/teaser.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts (matching vMAP / Nerfies template) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro&display=swap"
+        rel="stylesheet" />
+  <!-- Site-wide banner font (matches main page) -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <!-- KaTeX for math rendering (scripts loaded at end of body) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+  <!-- Sticky top banner (site-wide) -->
+  <header class="site-banner" role="banner">
+    <div class="site-banner__inner">
+      <a class="site-banner__brand" href="../">Shinjeong Kim</a>
+      <nav class="site-banner__nav" aria-label="Primary">
+        <a href="../#about">About Me</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <!-- ───────────── Header ───────────── -->
+    <header class="hero">
+      <h1 class="title">
+        <span class="title-main">PixVOD</span>
+        <span class="title-sub">Pixel-Distributed Direct Visual Odometry and Depth Estimation</span>
+      </h1>
+
+      <ol class="authors" aria-label="Authors">
+        <li><a href="../" rel="noopener"><span>Shinjeong Kim</span><sup>1</sup></a></li>
+        <li><a href="https://ialzugaray.github.io/" rel="noopener"><span>Ignacio Alzugaray</span><sup>1</sup></a></li>
+        <li><a href="https://scholar.google.com/citations?user=aQSQwcUAAAAJ" rel="noopener"><span>Callum Rhodes</span><sup>1</sup></a></li>
+        <li><a href="https://www.doc.ic.ac.uk/~phjk/" rel="noopener"><span>Paul H. J. Kelly</span><sup>1</sup></a></li>
+        <li><a href="https://www.doc.ic.ac.uk/~ajd/" rel="noopener"><span>Andrew J. Davison</span><sup>1</sup></a></li>
+      </ol>
+
+      <ol class="affiliations" aria-label="Affiliations">
+        <li><sup>1</sup>&nbsp;Imperial College London</li>
+      </ol>
+
+      <p class="venue">arXiv &middot; CVPRW 2026</p>
+
+      <nav class="actions" aria-label="Resources">
+        <a class="btn" href="#" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Zm0 2.5L18.5 10H15a1 1 0 0 1-1-1V5.5ZM8 13h8v2H8v-2Zm0 4h8v2H8v-2Z"/></svg>
+          <span>Paper</span>
+        </a>
+        <a class="btn" href="#" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 9l6 3-6 3z"/></svg>
+          <span>Video</span>
+        </a>
+        <a class="btn" href="#" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.92.58.11.79-.25.79-.56v-2.02c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.68 1.25 3.33.95.1-.74.4-1.25.72-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.09 0 4.44-2.7 5.41-5.27 5.69.41.36.78 1.06.78 2.14v3.18c0 .31.21.68.8.56C20.22 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5Z"/></svg>
+          <span>Code</span>
+        </a>
+        <a class="btn btn--ghost" href="#cite" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v2H3zM3 11h18v2H3zM3 18h18v2H3z"/></svg>
+          <span>BibTeX</span>
+        </a>
+      </nav>
+    </header>
+
+    <!-- ───────────── Teaser ───────────── -->
+    <section class="teaser prose" aria-labelledby="teaser-heading">
+      <h2 id="teaser-heading" class="sr-only">Teaser</h2>
+      <p class="muted">
+        PixVOD targets <em>on-sensor</em> visual odometry: a Pixel Processor Array where each
+        photosite tracks its own slice of the 6-DoF camera pose and its log-depth, exchanging
+        Gaussian messages with its neighbours so that only the high-level signal — pose and
+        depth — ever leaves the chip.
+      </p>
+      <div class="placeholder placeholder--video" role="img" aria-label="Teaser video placeholder">
+        <!--
+          Replace with:
+          <video src="./static/videos/teaser.mp4" autoplay muted loop playsinline></video>
+        -->
+        <span>Teaser video placeholder<br/><small>16:9 — drop teaser.mp4 in <code>static/videos/</code></small></span>
+      </div>
+    </section>
+
+    <!-- ───────────── Abstract ───────────── -->
+    <section id="abstract" class="prose" aria-labelledby="abstract-heading">
+      <h2 id="abstract-heading">Abstract</h2>
+      <p>
+        Images composed of 2D pixel arrays are the standard input to computer vision algorithms,
+        yet many underlying computations can be distributed across pixels. Transmitting raw,
+        redundant, and noisy pixel data off the sensor remains inefficient, motivating a shift
+        toward focal-plane sensor-processors that perform a significant part of the computation
+        directly within each pixel. We envision pixels synthesizing higher-level signals locally,
+        reducing downstream load, and providing richer inputs for higher-level vision tasks.
+      </p>
+      <p>
+        We propose <em>PixVOD</em>, a fully parallelizable form of visual odometry and depth
+        estimation across pixels, where sensor-processors exchange information through
+        <strong>Gaussian Belief Propagation (GBP)</strong> to achieve consensus about camera
+        motion and infer depth from per-pixel photometric observations and a surface normal prior.
+        To maintain geometric stability during optimization, we introduce a keyframe-like
+        anchoring mechanism that regulates the effective baseline between frames, enabling
+        consistent motion and depth updates. Our method is evaluated on realistic datasets,
+        demonstrating the feasibility of GBP-based pixel-level distributed visual odometry and
+        depth estimation with keyframe anchoring on-sensor.
+      </p>
+    </section>
+
+    <!-- ───────────── Factor Graph Structure ───────────── -->
+    <section id="factor-graph" class="prose" aria-labelledby="fg-heading">
+      <h2 id="fg-heading">Factor Graph Structure</h2>
+      <p class="muted">
+        Each pixel holds a stacked variable
+        $\boldsymbol{\mu}_i = (\boldsymbol{\xi}_i, d_i) \in \mathfrak{se}(3) \oplus \mathbb{R}$
+        — its local estimate of the global 6-DoF camera motion and its log-depth — and exchanges
+        Gaussian messages with its neighbours. Four factor families wire the graph:
+        <strong>photometric residuals</strong> after warping with the local pose &amp; depth,
+        <strong>pose-priors</strong> for motion continuity,
+        <strong>camera-motion identity factors</strong> arranged in a hierarchical quadtree so
+        consensus on the global pose propagates in $O(\log N)$ hops, and
+        <strong>normal-integration factors</strong> regularizing log-depth between neighbours
+        from a surface-normal prior.
+      </p>
+      <div class="placeholder placeholder--demo" role="img" aria-label="Factor graph diagram placeholder">
+        <!--
+          Replace with a diagram of the per-pixel variable + four factor types, or
+          an animation of GBP messages propagating through the quadtree topology.
+          Example:
+            <img src="./static/images/factor_graph.svg" alt="Factor graph schematic" />
+        -->
+        <span>Factor graph diagram placeholder<br/><small>per-pixel variable + 4 factor types + quadtree pose-identity topology</small></span>
+      </div>
+    </section>
+
+    <!-- ───────────── Visualization ───────────── -->
+    <section id="visualization" class="prose" aria-labelledby="viz-heading">
+      <h2 id="viz-heading">Visualization</h2>
+      <p class="muted">
+        Camera-motion estimates aggregated from the per-pixel pose beliefs, and per-pixel depth
+        recovered from the learned log-depth — across Replica office and room sequences, compared
+        against ground truth.
+      </p>
+      <div class="gallery">
+        <figure class="card">
+          <div class="placeholder placeholder--image"><span>Pose Trajectory</span></div>
+          <figcaption>Estimated camera trajectory vs. ground truth on a Replica sequence.</figcaption>
+        </figure>
+        <figure class="card">
+          <div class="placeholder placeholder--image"><span>Depth Map</span></div>
+          <figcaption>Per-pixel depth from $\exp(\mu_{i,7})$, against GT depth.</figcaption>
+        </figure>
+        <figure class="card">
+          <div class="placeholder placeholder--video"><span>GBP Convergence</span></div>
+          <figcaption>Pose &amp; depth evolution over GBP iterations during keyframe tracking.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ───────────── BibTeX ───────────── -->
+    <section id="cite" class="prose" aria-labelledby="cite-heading">
+      <h2 id="cite-heading">BibTeX</h2>
+      <pre><code>@article{kim2026pixvod,
+  title   = {{PixVOD}: Pixel-Distributed Direct Visual Odometry and Depth Estimation},
+  author  = {Kim, Shinjeong and Alzugaray, Ignacio and Rhodes, Callum and Kelly, Paul H. J. and Davison, Andrew J.},
+  journal = {arXiv preprint arXiv:XXXX.XXXXX},
+  year    = {2026}
+}</code></pre>
+    </section>
+
+    <footer class="footer">
+      <p>
+        Website template inspired by
+        <a href="https://kxhit.github.io/vMAP" rel="noopener">vMAP</a> and
+        <a href="https://www.garfield.studio/" rel="noopener">GARField</a>.
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- KaTeX auto-render: scripts at end of body, then synchronous init -->
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script>
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false},
+        {left: "$",  right: "$",  display: false}
+      ],
+      throwOnError: false
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <title>Learning to Make Keypoints Sub-Pixel Accurate</title>
+  <meta name="description"
+        content="Keypt2Subpx is a lightweight module that refines keypoint locations to sub-pixel accuracy from prospective two-view correspondences." />
+
+  <!-- Open Graph / social -->
+  <meta property="og:title" content="Learning to Make Keypoints Sub-Pixel Accurate" />
+  <meta property="og:description"
+        content="A lightweight add-on that gives any modern keypoint detector sub-pixel precision by learning per-feature offsets." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="../assets/keypt2subpx-thumb.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro&display=swap"
+        rel="stylesheet" />
+  <!-- Site-wide banner font (matches main page) -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+  <!-- Sticky top banner (site-wide) -->
+  <header class="site-banner" role="banner">
+    <div class="site-banner__inner">
+      <a class="site-banner__brand" href="../">Shinjeong Kim</a>
+      <nav class="site-banner__nav" aria-label="Primary">
+        <a href="../#about">About Me</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <!-- ───────────── Header ───────────── -->
+    <header class="hero">
+      <h1 class="title">
+        <span class="title-main">Learning to Make Keypoints Sub-Pixel Accurate</span>
+      </h1>
+
+      <ol class="authors" aria-label="Authors">
+        <li><a href="../" rel="noopener"><span>Shinjeong Kim</span><sup>1</sup></a></li>
+        <li><a href="https://cvg.ethz.ch/team/Prof-Dr-Marc-Pollefeys" rel="noopener"><span>Marc Pollefeys</span><sup>1,2</sup></a></li>
+        <li><a href="https://cvg.ethz.ch/team/Dr-Daniel-Bela-Barath" rel="noopener"><span>Daniel Barath</span><sup>1</sup></a></li>
+      </ol>
+
+      <ol class="affiliations" aria-label="Affiliations">
+        <li><sup>1</sup>&nbsp;ETH Zurich</li>
+        <li><sup>2</sup>&nbsp;Microsoft</li>
+      </ol>
+
+      <p class="venue">ECCV 2024</p>
+
+      <nav class="actions" aria-label="Resources">
+        <a class="btn" href="https://arxiv.org/abs/2407.11668" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Zm0 2.5L18.5 10H15a1 1 0 0 1-1-1V5.5ZM8 13h8v2H8v-2Zm0 4h8v2H8v-2Z"/></svg>
+          <span>Paper</span>
+        </a>
+        <a class="btn" href="https://www.youtube.com/watch?v=vn_DhMjjHhc" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 9l6 3-6 3z"/></svg>
+          <span>Video</span>
+        </a>
+        <a class="btn" href="https://github.com/KimSinjeong/keypt2subpx" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.92.58.11.79-.25.79-.56v-2.02c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.68 1.25 3.33.95.1-.74.4-1.25.72-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.09 0 4.44-2.7 5.41-5.27 5.69.41.36.78 1.06.78 2.14v3.18c0 .31.21.68.8.56C20.22 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5Z"/></svg>
+          <span>Code</span>
+        </a>
+        <a class="btn btn--ghost" href="#cite" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v2H3zM3 11h18v2H3zM3 18h18v2H3z"/></svg>
+          <span>BibTeX</span>
+        </a>
+      </nav>
+    </header>
+
+    <!-- ───────────── Teaser (TL;DR + YouTube) ───────────── -->
+    <section class="teaser prose" aria-labelledby="teaser-heading">
+      <h2 id="teaser-heading" class="sr-only">TL;DR</h2>
+      <p class="muted tldr">
+        <strong>TL;DR:</strong>
+        The Keypt2Subpx module learns multi-view consistent sub-pixel adjustment
+        for any keypoints, given the prospective keypoint correspondence between
+        two images.
+      </p>
+      <div class="video-embed" aria-label="Explainer video">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/vn_DhMjjHhc"
+          title="Keypt2Subpx — explainer video"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- ───────────── Abstract ───────────── -->
+    <section id="abstract" class="prose" aria-labelledby="abstract-heading">
+      <h2 id="abstract-heading">Abstract</h2>
+      <p>
+        This work addresses the challenge of sub-pixel accuracy in detecting 2D
+        local features, a cornerstone problem in computer vision. Despite the
+        advancements brought by neural network-based methods like SuperPoint and
+        ALIKED, these modern approaches lag behind classical ones such as SIFT
+        in keypoint localization accuracy due to their lack of sub-pixel
+        precision. We propose a novel network that enhances any detector with
+        sub-pixel precision by learning an offset vector for detected features,
+        thereby eliminating the need for designing specialized sub-pixel
+        accurate detectors. This optimization directly minimizes test-time
+        evaluation metrics like relative pose error. Through extensive testing
+        with both nearest neighbors matching and the recent LightGlue matcher
+        across various real-world datasets, our method consistently outperforms
+        existing methods in accuracy. Moreover, it adds only around 7&nbsp;ms to
+        the time of a particular detector.
+      </p>
+    </section>
+
+    <!-- ───────────── Poster ───────────── -->
+    <section id="poster" class="prose" aria-labelledby="poster-heading">
+      <h2 id="poster-heading">Poster</h2>
+      <a class="poster-embed"
+         href="./static/poster/keypt2subpx-eccv2024-poster.pdf"
+         target="_blank" rel="noopener"
+         aria-label="Open ECCV 2024 poster as PDF">
+        <img src="./static/poster/keypt2subpx-eccv2024-poster.jpg"
+             alt="ECCV 2024 poster — Learning to Make Keypoints Sub-Pixel Accurate"
+             loading="lazy" />
+      </a>
+    </section>
+
+    <!-- ───────────── BibTeX ───────────── -->
+    <section id="cite" class="prose" aria-labelledby="cite-heading">
+      <h2 id="cite-heading">BibTeX</h2>
+      <pre><code>@InProceedings{kim2024keypt2subpx,
+    author = {Shinjeong Kim and Marc Pollefeys and Daniel Barath},
+    title = {Learning to Make Keypoints Sub-Pixel Accurate},
+    booktitle = {The European Conference on Computer Vision (ECCV)},
+    year = {2024}
+}</code></pre>
+    </section>
+
+    <footer class="footer">
+      <p>
+        Website template inspired by
+        <a href="https://kxhit.github.io/vMAP" rel="noopener">vMAP</a> and
+        <a href="https://www.garfield.studio/" rel="noopener">GARField</a>.
+      </p>
+    </footer>
+
+  </main>
+
+</body>
+</html>
