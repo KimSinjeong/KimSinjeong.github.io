@@ -217,7 +217,7 @@ section:first-of-type { margin-top: 2rem; }
 .placeholder--demo { aspect-ratio: 16 / 9; }
 .placeholder--image { aspect-ratio: 4 / 3; }
 
-.teaser { margin-top: 2rem; }
+.teaser { margin-top: 2rem; margin-bottom: 1.75rem; }
 .teaser .muted { margin-bottom: 1rem; }
 .gallery figure { margin: 0; }
 .card figcaption {
@@ -254,8 +254,43 @@ section:first-of-type { margin-top: 2rem; }
 @media (min-width: 900px) {
   .gallery { grid-template-columns: repeat(3, 1fr); }
 }
+/* 2-column variant that stays at 2 columns even on wide screens */
+.gallery--2 { grid-template-columns: 1fr; }
+@media (min-width: 640px) {
+  .gallery--2 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 900px) {
+  .gallery--2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Full-width card (its own row, e.g., below the 2-col gallery) */
+.card--full {
+  margin: 2rem 0 0;
+  width: 100%;
+}
+.card--full .placeholder { aspect-ratio: 16 / 9; }
 
 .card .placeholder { margin: 0; }
+/* Reset default <figure> margins so figcaptions sit tight under the video */
+.card { margin: 0; display: flex; flex-direction: column; }
+/* Force the figcaption row inside the card so it always lays out below the
+   media, separated by a consistent margin. */
+.card figcaption {
+  display: block;
+  width: 100%;
+}
+
+/* Interactive Demo videos — the card sizes to the clip's natural aspect
+   ratio (no cover/crop). width fills the card column, height follows the
+   clip's intrinsic aspect. */
+.demo-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #000;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
 
 /* ───── Code block ───── */
 pre {
@@ -280,7 +315,248 @@ pre code { background: transparent; padding: 0; }
   color: var(--fg-muted);
 }
 
+/* ───── Object strip (decomposed objects below the teaser) ───── */
+.object-strip-section {
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+.object-strip-caption {
+  margin: 0.75rem 0 0;
+  text-align: center;
+  font-size: 1.05rem;    /* match .tldr caption */
+}
+.object-strip-caption strong { color: var(--fg); font-weight: 600; }
+.object-strip-wrap {
+  position: relative;
+  padding: 0 36px;
+  /* Pull the strip up so the topmost card (Mug, shifted +24) sits right
+     under the caption — the 24 px above Mug and the ~29 px above the
+     shorter cards aren't used by any content, so we collapse them. */
+  margin-top: -50px;
+}
+.object-strip {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* extra bottom padding accommodates --shift-* cards translating below the baseline */
+  padding: 0.25rem 0.25rem 3rem;
+  margin: 0 -0.25rem;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/Edge */
+}
+.object-strip::-webkit-scrollbar { display: none; }  /* WebKit */
+.object-card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  line-height: 0;
+}
+.object-card video {
+  display: block;
+  height: 100px;
+  width: auto;
+  background: transparent;
+}
+.object-card__label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;     /* match .tldr / .object-strip-caption */
+  line-height: 1.4;
+  color: var(--fg-muted);
+  text-align: center;
+  margin-top: 0.5rem;
+  white-space: nowrap;
+}
+/* Counter-shift labels so they line up at the same baseline across the strip
+   regardless of the parent card's vertical translation. */
+.object-card--shift-mug    .object-card__label { transform: translateY(-24px); }
+.object-card--shift-pocket .object-card__label { transform: translateY(-38px); }
+/* Big (Mug / Pocket): keep the video at its original 150-px display size so
+   the object body stays visually large, but clip only ~1/7 of the top
+   (a thin band that is mostly empty/artifact) so the card contributes
+   ~129 px to the row instead of 150. The shorter videos still align at
+   the bottom but with only a small empty band above them. */
+.object-card--big {
+  display: flex;
+  flex-direction: column;
+}
+.object-card__video-clip {
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  height: 129px;     /* 150 - ~21 (1/7 of 150) */
+}
+.object-card--big video {
+  height: 150px;
+  width: auto;
+}
+/* Per-object vertical shift modifiers (chosen to align solid-body bottoms across the strip) */
+.object-card--shift-mug { transform: translateY(24px); }
+.object-card--shift-pocket { transform: translateY(38px); }
+/* Clip a few px from each side of the Mug video; negative margin keeps spacing consistent */
+.object-card--clip-h video { clip-path: inset(0 12px); }
+.object-card--clip-h { margin-left: -12px; margin-right: -12px; }
+/* Asymmetric right-only clip for objects whose right margin is heavier than the left
+   (Mouse, Keyboard). Amount is overridable via the --clip-r CSS variable. */
+.object-card--clip-r video { clip-path: inset(0 var(--clip-r, 12px) 0 0); }
+.object-card--clip-r { margin-right: calc(-1 * var(--clip-r, 12px)); }
+/* Left-only clip counterpart for objects whose left margin is heavier (Pocket). */
+.object-card--clip-l video { clip-path: inset(0 0 0 var(--clip-l, 12px)); }
+.object-card--clip-l { margin-left: calc(-1 * var(--clip-l, 12px)); }
+@media (max-width: 720px) {
+  .object-card video { height: 75px; }
+  .object-card--big video { height: 112px; }
+  .object-card__video-clip { height: 96px; }   /* 112 - ~16 (1/7 of 112) */
+  .object-strip-wrap { margin-top: -38px; }
+  .object-card--shift-mug { transform: translateY(18px); }
+  .object-card--shift-pocket { transform: translateY(28px); }
+  .object-card--shift-mug    .object-card__label { transform: translateY(-18px); }
+  .object-card--shift-pocket .object-card__label { transform: translateY(-28px); }
+  .object-card--clip-h video { clip-path: inset(0 9px); }
+  .object-card--clip-h { margin-left: -9px; margin-right: -9px; }
+  .object-card--clip-r video { clip-path: inset(0 calc(var(--clip-r, 12px) * 0.75) 0 0); }
+  .object-card--clip-r { margin-right: calc(-0.75 * var(--clip-r, 12px)); }
+  .object-card--clip-l video { clip-path: inset(0 0 0 calc(var(--clip-l, 12px) * 0.75)); }
+  .object-card--clip-l { margin-left: calc(-0.75 * var(--clip-l, 12px)); }
+}
+
+/* Arrow buttons (GARField-style, scroll one card at a time) */
+.strip-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: var(--shadow);
+  transition: background 120ms ease, color 120ms ease, opacity 120ms ease;
+}
+.strip-arrow svg { width: 16px; height: 16px; display: block; }
+.strip-arrow:hover:not([aria-disabled="true"]) {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+.strip-arrow[aria-disabled="true"] {
+  opacity: 0.35;
+  cursor: default;
+}
+.strip-arrow--prev { left: 0; }
+.strip-arrow--next { right: 0; }
+
+/* ───── Teaser video (real file, natural aspect ratio) ───── */
+.teaser__video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 0;
+  background: transparent;
+  /* The video has a white title bar at the top ("MLP-Splatting" / "Feature-3DGS").
+     `darken` keeps black text and scene colors but blends any near-white pixels
+     down to the page background (ivory) so the title strip looks transparent. */
+  mix-blend-mode: darken;
+}
+
+/* ───── TL;DR caption ───── */
+.tldr {
+  font-size: 1.05rem;
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+.tldr strong { color: var(--fg); }
+
+/* ───── Figures row (3-axis primitive + teaser splat) ───── */
+.figures-row { margin-top: 2rem; }
+.figures-row__row {
+  /* Column widths are proportional to each figure's aspect ratio (w/h)
+     so that with width:100% images, both rendered images end up at the
+     same on-screen height. 3axis = 430×429 (≈1.002), teaser = 1034×466
+     (≈2.219). */
+  display: grid;
+  grid-template-columns: 1.002fr 2.219fr;
+  gap: 1rem;
+  align-items: stretch;
+}
+.figures-row__item {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.figures-row__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.figures-row__caption {
+  margin: 0.75rem 0 1rem;
+  text-align: center;
+  font-size: 1.05rem;     /* match other captions */
+}
+@media (max-width: 640px) {
+  .figures-row__row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
 /* ───── Reduced motion ───── */
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
+  .object-card video { animation: none; }
 }
+
+/* ───── BibTeX copy button ───── */
+.bibtex { position: relative; }
+.bibtex pre { padding-right: 5.5rem; }
+.bibtex__copy {
+  position: absolute;
+  top: .6rem;
+  right: .6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  padding: .3rem .55rem;
+  font-family: var(--font-sans);
+  font-size: .82rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.bibtex__copy:hover {
+  background: var(--surface);
+  border-color: var(--accent);
+}
+.bibtex__copy:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.bibtex__icon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+.bibtex__icon--check { display: none; }
+.bibtex__copy.is-copied {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.bibtex__copy.is-copied .bibtex__icon--copy { display: none; }
+.bibtex__copy.is-copied .bibtex__icon--check { display: inline-block; }

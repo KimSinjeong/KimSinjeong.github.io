@@ -180,12 +180,19 @@
     <!-- ───────────── BibTeX ───────────── -->
     <section id="cite" class="prose" aria-labelledby="cite-heading">
       <h2 id="cite-heading">BibTeX</h2>
-      <pre><code>@article{kim2026pixvod,
+      <div class="bibtex">
+        <button type="button" class="bibtex__copy" aria-label="Copy BibTeX to clipboard">
+          <svg class="bibtex__icon bibtex__icon--copy" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1Zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm0 16H8V7h11v14Z"/></svg>
+          <svg class="bibtex__icon bibtex__icon--check" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg>
+          <span class="bibtex__copy-label">Copy</span>
+        </button>
+        <pre><code>@article{kim2026pixvod,
   title   = {{PixVOD}: Pixel-Distributed Direct Visual Odometry and Depth Estimation},
   author  = {Kim, Shinjeong and Alzugaray, Ignacio and Rhodes, Callum and Kelly, Paul H. J. and Davison, Andrew J.},
   journal = {arXiv preprint arXiv:XXXX.XXXXX},
   year    = {2026}
 }</code></pre>
+      </div>
     </section>
 
     <footer class="footer">
@@ -210,6 +217,36 @@
         {left: "$",  right: "$",  display: false}
       ],
       throwOnError: false
+    });
+  </script>
+  <script>
+    document.querySelectorAll('.bibtex__copy').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const code = btn.closest('.bibtex').querySelector('code');
+        if (!code) return;
+        const text = code.textContent.trim();
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch (e) {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); } catch (_) {}
+          document.body.removeChild(ta);
+        }
+        const label = btn.querySelector('.bibtex__copy-label');
+        const prev = label ? label.textContent : null;
+        btn.classList.add('is-copied');
+        if (label) label.textContent = 'Copied';
+        clearTimeout(btn._copyTimer);
+        btn._copyTimer = setTimeout(() => {
+          btn.classList.remove('is-copied');
+          if (label && prev !== null) label.textContent = prev;
+        }, 1500);
+      });
     });
   </script>
 </body>

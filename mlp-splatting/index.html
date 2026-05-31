@@ -90,16 +90,60 @@
     <!-- ───────────── Teaser ───────────── -->
     <section class="teaser prose" aria-labelledby="teaser-heading">
       <h2 id="teaser-heading" class="sr-only">Teaser</h2>
-      <p class="muted">
-        Short caption describing the teaser — what the viewer is seeing, the scene,
-        and the takeaway in one or two sentences.
+      <p class="muted tldr">
+        <strong>TL;DR:</strong>
+        Primitives composed of local light-fields, each centered on and weighted by an anisotropic Gaussian, <u>learn to decompose the scene at the object or part level</u>.
       </p>
-      <div class="placeholder placeholder--video" role="img" aria-label="Teaser video placeholder">
-        <!--
-          Replace with:
-          <video src="./static/videos/teaser.mp4" autoplay muted loop playsinline></video>
-        -->
-        <span>Teaser video placeholder<br/><small>16:9 — drop teaser.mp4 in <code>static/videos/</code></small></span>
+      <video class="teaser__video" autoplay muted loop playsinline preload="metadata"
+             aria-label="MLP Splatting vs. Feature 3DGS orbit comparison">
+        <source src="./static/videos/teaser.mp4" type="video/mp4" />
+      </video>
+    </section>
+
+    <!-- ───────────── Object strip ───────────── -->
+    <section class="object-strip-section prose" aria-labelledby="objects-heading">
+      <h2 id="objects-heading" class="sr-only">Decomposed objects</h2>
+      <p class="muted object-strip-caption">
+        MLP-Splatting efficiently reconstructs even the most complex objects with just a
+        few hundred primitives: matching Feature-3DGS in scene quality
+        (+0.6&nbsp;dB PSNR) while using <strong>1/63</strong> the primitives,
+        <strong>1/6</strong> the memory, and rendering <strong>2&times;</strong> faster.
+      </p>
+      <div class="object-strip-wrap">
+        <button type="button" class="strip-arrow strip-arrow--prev" aria-label="Previous object" aria-disabled="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="object-strip" role="list">
+          <span class="object-card" role="listitem"><video src="./static/videos/objects/object_08_White_King.webm" autoplay muted loop playsinline></video><span class="object-card__label">51 MLPs</span></span>
+          <span class="object-card object-card--clip-r" style="--clip-r: 28px" role="listitem"><video src="./static/videos/objects/object_13_Keyboard.webm" autoplay muted loop playsinline></video><span class="object-card__label">483 MLPs</span></span>
+          <span class="object-card object-card--big object-card--shift-mug object-card--clip-h" role="listitem"><span class="object-card__video-clip"><video src="./static/videos/objects/object_19_Mug.webm" autoplay muted loop playsinline></video></span><span class="object-card__label">97 MLPs</span></span>
+          <span class="object-card" role="listitem"><video src="./static/videos/objects/object_20_Duck.webm" autoplay muted loop playsinline></video><span class="object-card__label">44 MLPs</span></span>
+          <span class="object-card object-card--clip-r" style="--clip-r: 4px" role="listitem"><video src="./static/videos/objects/object_21_Mouse.webm" autoplay muted loop playsinline></video><span class="object-card__label">46 MLPs</span></span>
+          <span class="object-card object-card--big object-card--shift-pocket object-card--clip-l" style="--clip-l: 14px" role="listitem"><span class="object-card__video-clip"><video src="./static/videos/objects/object_18_Pocket.webm" autoplay muted loop playsinline></video></span><span class="object-card__label">143 MLPs</span></span>
+        </div>
+        <button type="button" class="strip-arrow strip-arrow--next" aria-label="Next object">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ───────────── Figures row (3-axis primitive + teaser splat) ───────────── -->
+    <section class="figures-row prose" aria-labelledby="figs-row-heading">
+      <h2 id="figs-row-heading" class="sr-only">Method figures</h2>
+      <p class="muted figures-row__caption">
+        MLP-Splatting offers the compactness of a neural scene representation
+        while keeping each primitive&rsquo;s influence independent, making
+        downstream tasks such as scene editing straightforward. E.g. with added
+        semantic guidance on top of the proposed method, language-guided
+        editing becomes possible (<a href="#visualization">see examples</a>).
+      </p>
+      <div class="figures-row__row">
+        <figure class="figures-row__item figures-row__item--axes">
+          <img src="./static/images/3axis.svg" alt="3-axis local primitive frame" />
+        </figure>
+        <figure class="figures-row__item figures-row__item--teaser">
+          <img src="./static/images/teaser.svg" alt="MLP-Splatting teaser figure" />
+        </figure>
       </div>
     </section>
 
@@ -107,75 +151,84 @@
     <section id="abstract" class="prose" aria-labelledby="abstract-heading">
       <h2 id="abstract-heading">Abstract</h2>
       <p>
-        3D representations are fundamental to scene rendering, understanding, and interaction.
-        Recent approaches such as 3D Gaussian Splatting and Neural Radiance Fields achieve
-        impressive photorealistic novel-view synthesis, but lack the ability to easily decompose
-        scene elements into a few primitives, requiring additional segmentation or grouping for
-        object-level manipulation. We present <em>MLP-Splatting</em>, a method that enables scene
-        decomposition via a few expressive light-field primitives while providing photorealistic
-        novel-view synthesis.
+        3D representations are fundamental to scene rendering, understanding,
+        and interaction. Recent approaches, such as 3D Gaussian Splatting and
+        Neural Radiance Fields, achieve impressive photorealistic novel-view
+        synthesis, but lack the ability to easily decompose scene elements
+        into a few primitives, requiring additional segmentation or grouping
+        for object-level manipulation. We present <em>MLP-Splatting</em>,
+        a method that enables scene decomposition via a few expressive
+        light-field primitives while providing photorealistic novel-view
+        synthesis.
       </p>
       <p>
-        MLP-Splatting models each primitive as an independent compact MLP with localized spatial
-        support that predicts radiance and opacity. In contrast to low-level Gaussian primitives
-        or a single global radiance field, our neural primitives provide greater expressive
-        capacity while remaining spatially localized. Rendering is performed through sparse
-        volumetric compositing over ray–primitive interactions:
-        $$
-          C(\mathbf{r}) \;=\; \sum_{i \in \mathcal{S}(\mathbf{r})} T_i\,\bigl(1 - e^{-\sigma_i \delta_i}\bigr)\,\mathbf{c}_i,
-          \qquad T_i = \exp\!\Bigl(-\!\!\sum_{j&lt;i} \sigma_j \delta_j\Bigr).
-        $$
+        MLP-Splatting models each primitive as an independent compact MLP
+        with localized spatial support that predicts radiance and opacity.
+        In contrast to low-level Gaussian primitives or a single global
+        radiance field, our neural primitives provide greater expressive
+        capacity while remaining spatially localized. Rendering is performed
+        through efficient sparse volumetric compositing over ray–primitive
+        interactions.
+      </p>
+      <p>
+        Our primitives are supervised using RGB supervision alone, which
+        yields primitives that represent local scene regions often
+        corresponding to objects or object parts, enabling interactive
+        object-level editing without segmentation masks by selecting a
+        handful of primitives. Our method, augmented with optional semantic
+        feature distillation, enables open-vocabulary scene interaction and
+        open-set instant segmentation. Compared to state-of-the-art methods,
+        we achieve substantially lower memory usage ($1/15\times$) and faster
+        rendering ($3\times$), as we show in our experiments compared to
+        semantic 3DGS methods.
       </p>
     </section>
 
-    <!-- ───────────── Demo ───────────── -->
-    <section id="demo" class="prose" aria-labelledby="demo-heading">
-      <h2 id="demo-heading">Interactive Demo</h2>
-      <p class="muted">
-        A WebGL / canvas-based interactive viewer goes here — e.g. a primitive selector or
-        a 3D Gaussian Splatting renderer for one of the captured scenes.
-      </p>
-      <div class="placeholder placeholder--demo" role="img" aria-label="Interactive demo placeholder">
-        <!--
-          Replace with an iframe, canvas, or <model-viewer> element.
-          Example:
-            <iframe src="./demo/viewer.html" title="Interactive viewer" loading="lazy"></iframe>
-        -->
-        <span>Interactive demo placeholder<br/><small>iframe / canvas mount point</small></span>
-      </div>
-    </section>
-
-    <!-- ───────────── Visualization ───────────── -->
+    <!-- ───────────── Interactive Demo ───────────── -->
     <section id="visualization" class="prose" aria-labelledby="viz-heading">
-      <h2 id="viz-heading">Visualization</h2>
+      <h2 id="viz-heading">Interactive Demo</h2>
       <p class="muted">
-        Per-primitive decomposition, novel-view renderings, and qualitative comparisons.
+        Below is an interactive demo of the easy object selection, editing,
+        and language-guided editing enabled by our object-level primitives.
       </p>
-      <div class="gallery">
+      <div class="gallery gallery--2">
         <figure class="card">
-          <div class="placeholder placeholder--image"><span>Decomposition</span></div>
-          <figcaption>Learned primitives covering an object.</figcaption>
+          <video class="demo-video" muted loop playsinline controls preload="metadata">
+            <source src="./static/videos/demo/clip1-selection.mp4" type="video/mp4" />
+          </video>
+          <figcaption>Easy object selection.</figcaption>
         </figure>
         <figure class="card">
-          <div class="placeholder placeholder--image"><span>Novel View</span></div>
-          <figcaption>Novel-view synthesis from a held-out pose.</figcaption>
-        </figure>
-        <figure class="card">
-          <div class="placeholder placeholder--video"><span>Fly-through</span></div>
-          <figcaption>Camera fly-through over the scene.</figcaption>
+          <video class="demo-video" muted loop playsinline controls preload="metadata">
+            <source src="./static/videos/demo/clip2-edit.mp4" type="video/mp4" />
+          </video>
+          <figcaption>Per-object SE(3) and color edits.</figcaption>
         </figure>
       </div>
+      <figure class="card card--full">
+        <video class="demo-video" muted loop playsinline controls preload="metadata">
+          <source src="./static/videos/demo/clip3-language.mp4" type="video/mp4" />
+        </video>
+        <figcaption>Language-guided segmentation and deletion.</figcaption>
+      </figure>
     </section>
 
     <!-- ───────────── BibTeX ───────────── -->
     <section id="cite" class="prose" aria-labelledby="cite-heading">
       <h2 id="cite-heading">BibTeX</h2>
-      <pre><code>@article{kim2026mlpsplatting,
+      <div class="bibtex">
+        <button type="button" class="bibtex__copy" aria-label="Copy BibTeX to clipboard">
+          <svg class="bibtex__icon bibtex__icon--copy" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1Zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm0 16H8V7h11v14Z"/></svg>
+          <svg class="bibtex__icon bibtex__icon--check" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg>
+          <span class="bibtex__copy-label">Copy</span>
+        </button>
+        <pre><code>@article{kim2026mlpsplatting,
   title   = {MLP Splatting: Object-Centric Neural Fields},
   author  = {Kim, Shinjeong and Cheng, Yuzhou and Kong, Xin and Davison, Andrew and Kelly, Paul},
   journal = {arXiv preprint arXiv:XXXX.XXXXX},
   year    = {2026}
 }</code></pre>
+      </div>
     </section>
 
     <footer class="footer">
@@ -187,6 +240,9 @@
     </footer>
 
   </main>
+
+  <!-- Object strip controller -->
+  <script src="./js/objects.js" defer></script>
 
   <!-- KaTeX auto-render: scripts at end of body, then synchronous init -->
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
@@ -200,6 +256,36 @@
         {left: "$",  right: "$",  display: false}
       ],
       throwOnError: false
+    });
+  </script>
+  <script>
+    document.querySelectorAll('.bibtex__copy').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const code = btn.closest('.bibtex').querySelector('code');
+        if (!code) return;
+        const text = code.textContent.trim();
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch (e) {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); } catch (_) {}
+          document.body.removeChild(ta);
+        }
+        const label = btn.querySelector('.bibtex__copy-label');
+        const prev = label ? label.textContent : null;
+        btn.classList.add('is-copied');
+        if (label) label.textContent = 'Copied';
+        clearTimeout(btn._copyTimer);
+        btn._copyTimer = setTimeout(() => {
+          btn.classList.remove('is-copied');
+          if (label && prev !== null) label.textContent = prev;
+        }, 1500);
+      });
     });
   </script>
 </body>
