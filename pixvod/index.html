@@ -52,15 +52,15 @@
       </h1>
 
       <ol class="authors" aria-label="Authors">
-        <li><a href="../" rel="noopener"><span>Shinjeong Kim</span><sup>1</sup></a></li>
-        <li><a href="https://ialzugaray.github.io/" rel="noopener"><span>Ignacio Alzugaray</span><sup>1</sup></a></li>
-        <li><a href="https://scholar.google.com/citations?user=aQSQwcUAAAAJ" rel="noopener"><span>Callum Rhodes</span><sup>1</sup></a></li>
-        <li><a href="https://www.doc.ic.ac.uk/~phjk/" rel="noopener"><span>Paul H. J. Kelly</span><sup>1</sup></a></li>
-        <li><a href="https://www.doc.ic.ac.uk/~ajd/" rel="noopener"><span>Andrew J. Davison</span><sup>1</sup></a></li>
+        <li><a href="../" rel="noopener"><span>Shinjeong Kim</span></a></li>
+        <li><a href="https://ialzugaray.github.io/" rel="noopener"><span>Ignacio Alzugaray</span></a></li>
+        <li><a href="https://scholar.google.com/citations?user=aQSQwcUAAAAJ" rel="noopener"><span>Callum Rhodes</span></a></li>
+        <li><a href="https://www.doc.ic.ac.uk/~phjk/" rel="noopener"><span>Paul H. J. Kelly</span></a></li>
+        <li><a href="https://www.doc.ic.ac.uk/~ajd/" rel="noopener"><span>Andrew J. Davison</span></a></li>
       </ol>
 
       <ol class="affiliations" aria-label="Affiliations">
-        <li><sup>1</sup>&nbsp;Imperial College London</li>
+        <li>Imperial College London</li>
       </ol>
 
       <p class="venue">arXiv &middot; CVPRW 2026</p>
@@ -94,12 +94,16 @@
         Gaussian messages with its neighbours so that only the high-level signal — pose and
         depth — ever leaves the chip.
       </p>
-      <div class="placeholder placeholder--video" role="img" aria-label="Teaser video placeholder">
-        <!--
-          Replace with:
-          <video src="./static/videos/teaser.mp4" autoplay muted loop playsinline></video>
-        -->
-        <span>Teaser video placeholder<br/><small>16:9 — drop teaser.mp4 in <code>static/videos/</code></small></span>
+      <div class="teaser-row">
+        <figure class="teaser-item teaser-item--img">
+          <img src="./static/images/teaser_pixvod.svg" alt="PixVOD pixel-level Gaussian Belief Propagation teaser" />
+        </figure>
+        <figure class="teaser-item teaser-item--video">
+          <video autoplay muted loop playsinline preload="metadata"
+                 aria-label="PixVOD per-pixel pose and depth consensus over GBP iterations">
+            <source src="./static/videos/consensus_teaser_zoom.mp4" type="video/mp4" />
+          </video>
+        </figure>
       </div>
     </section>
 
@@ -117,7 +121,7 @@
       <p>
         We propose <em>PixVOD</em>, a fully parallelizable form of visual odometry and depth
         estimation across pixels, where sensor-processors exchange information through
-        <strong>Gaussian Belief Propagation (GBP)</strong> to achieve consensus about camera
+        <strong><a href="https://gaussianbp.github.io/" target="_blank" rel="noopener">Gaussian Belief Propagation (GBP)</a></strong> to achieve consensus about camera
         motion and infer depth from per-pixel photometric observations and a surface normal prior.
         To maintain geometric stability during optimization, we introduce a keyframe-like
         anchoring mechanism that regulates the effective baseline between frames, enabling
@@ -142,15 +146,10 @@
         <strong>normal-integration factors</strong> regularizing log-depth between neighbours
         from a surface-normal prior.
       </p>
-      <div class="placeholder placeholder--demo" role="img" aria-label="Factor graph diagram placeholder">
-        <!--
-          Replace with a diagram of the per-pixel variable + four factor types, or
-          an animation of GBP messages propagating through the quadtree topology.
-          Example:
-            <img src="./static/images/factor_graph.svg" alt="Factor graph schematic" />
-        -->
-        <span>Factor graph diagram placeholder<br/><small>per-pixel variable + 4 factor types + quadtree pose-identity topology</small></span>
-      </div>
+      <video class="method-video" muted loop playsinline controls preload="metadata"
+             aria-label="Visual explanation of PixVOD's method">
+        <source src="./static/videos/method.mp4" type="video/mp4" />
+      </video>
     </section>
 
     <!-- ───────────── Visualization ───────────── -->
@@ -161,20 +160,10 @@
         recovered from the learned log-depth — across Replica office and room sequences, compared
         against ground truth.
       </p>
-      <div class="gallery">
-        <figure class="card">
-          <div class="placeholder placeholder--image"><span>Pose Trajectory</span></div>
-          <figcaption>Estimated camera trajectory vs. ground truth on a Replica sequence.</figcaption>
-        </figure>
-        <figure class="card">
-          <div class="placeholder placeholder--image"><span>Depth Map</span></div>
-          <figcaption>Per-pixel depth from $\exp(\mu_{i,7})$, against GT depth.</figcaption>
-        </figure>
-        <figure class="card">
-          <div class="placeholder placeholder--video"><span>GBP Convergence</span></div>
-          <figcaption>Pose &amp; depth evolution over GBP iterations during keyframe tracking.</figcaption>
-        </figure>
-      </div>
+      <video class="qualitative-video" muted loop playsinline controls preload="metadata"
+             aria-label="PixVOD qualitative results">
+        <source src="./static/videos/qualitative.mp4" type="video/mp4" />
+      </video>
     </section>
 
     <!-- ───────────── BibTeX ───────────── -->

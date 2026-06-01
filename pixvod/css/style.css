@@ -327,3 +327,38 @@ pre code { background: transparent; padding: 0; }
 }
 .bibtex__copy.is-copied .bibtex__icon--copy { display: none; }
 .bibtex__copy.is-copied .bibtex__icon--check { display: inline-block; }
+
+/* ───── Teaser stack (cropped figure + consensus video, stacked vertically) ───── */
+.teaser-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.teaser-item {
+  margin: 0;
+  width: 100%;
+}
+.teaser-item img,
+.teaser-item video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+.teaser-item--img { width: 75%; }   /* image narrower than video for readability */
+.teaser-item--video video {
+  background: #000;
+}
+
+/* Method clip + qualitative clip — both 1280×720 (16:9); width fills the column */
+.method-video,
+.qualitative-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #000;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
