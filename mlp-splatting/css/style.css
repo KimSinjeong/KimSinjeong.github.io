@@ -560,3 +560,31 @@ pre code { background: transparent; padding: 0; }
 }
 .bibtex__copy.is-copied .bibtex__icon--copy { display: none; }
 .bibtex__copy.is-copied .bibtex__icon--check { display: inline-block; }
+
+/* ───── Results table (compiled LaTeX, embedded as SVG) ───── */
+.results-figure { margin: 0; }
+.results-figure img {
+  display: block;
+  width: 100%;      /* fill the content column edge-to-edge */
+  height: auto;
+}
+
+/* ───── Qualitative results figure (full-width image + caption) ───── */
+.qual-figure { margin: 2.25rem 0 0; }
+.qual-figure img {
+  display: block;
+  width: 100%;      /* fill the content column edge-to-edge */
+  height: auto;
+}
+
+/* Shared website-style caption (used for both the table and the figure) */
+.fig-caption {
+  font-size: .92rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+  text-align: center;
+}
+.fig-caption strong { color: var(--fg); font-weight: 700; }
+.fig-caption a { color: var(--accent); }
+.results-figure .fig-caption { margin: 0 0 .9rem; }  /* table caption sits above */
+.qual-figure .fig-caption    { margin: .85rem 0 0; }  /* figure caption sits below */

@@ -53,7 +53,7 @@
 
       <ol class="authors" aria-label="Authors">
         <li><a href="../" rel="noopener"><span>Shinjeong Kim</span><sup>*</sup></a></li>
-        <li><span>Yuzhou Cheng</span><sup>*</sup></li>
+        <li><a href="https://scholar.google.com/citations?user=NHGDWxUAAAAJ" rel="noopener"><span>Yuzhou Cheng</span><sup>*</sup></a></li>
         <li><a href="https://kxhit.github.io/" rel="noopener"><span>Xin Kong</span><sup>*</sup></a></li>
         <li><a href="https://www.doc.ic.ac.uk/~phjk/" rel="noopener"><span>Paul H. J. Kelly</span></a></li>
         <li><a href="https://www.doc.ic.ac.uk/~ajd/" rel="noopener"><span>Andrew J. Davison</span></a></li>
@@ -209,6 +209,26 @@
           <source src="./static/videos/demo/clip3-language.mp4" type="video/mp4" />
         </video>
         <figcaption>Language-guided segmentation and deletion.</figcaption>
+      </figure>
+    </section>
+
+    <!-- ───────────── Results ───────────── -->
+    <section id="results" class="prose" aria-labelledby="results-heading">
+      <h2 id="results-heading">Results</h2>
+      <figure class="results-figure">
+        <figcaption class="fig-caption">
+          <strong>Table&nbsp;1.</strong> Novel-view synthesis evaluation on Replica&nbsp;<a href="https://arxiv.org/abs/1906.05797" rel="noopener">[Straub et&nbsp;al. 2019]</a> and ScanNet&nbsp;<a href="https://arxiv.org/abs/1702.04405" rel="noopener">[Dai et&nbsp;al. 2017]</a> datasets.
+        </figcaption>
+        <img src="./static/images/results_table.svg"
+             alt="Table 1. Novel-view synthesis evaluation on Replica and ScanNet datasets. Replica — PSNR: Feature-3DGS 36.18, Ours 36.25; SSIM: 0.964, 0.971; LPIPS: 0.079, 0.090. ScanNet — PSNR: 23.32, 25.35; SSIM: 0.817, 0.830; LPIPS: 0.362, 0.403." />
+      </figure>
+
+      <figure class="qual-figure">
+        <img src="./static/images/lseg_semantics.jpg"
+             alt="3D semantic segmentation with LSeg-guided embeddings rendered on novel views. Four columns — Ground Truth, Rendered Image, Rendered Feature, Segmentation — comparing Feature-3DGS and Ours against ground truth. Top two rows: Replica dataset; bottom two rows: ScanNet dataset." />
+        <figcaption class="fig-caption">
+          <strong>Figure&nbsp;4.</strong> 3D semantic segmentation with LSeg-guided embeddings rendered on novel views. The top two rows are from the Replica dataset&nbsp;<a href="https://arxiv.org/abs/1906.05797" rel="noopener">[Straub et&nbsp;al. 2019]</a>, and the bottom two rows are from the ScanNet&nbsp;<a href="https://arxiv.org/abs/1702.04405" rel="noopener">[Dai et&nbsp;al. 2017]</a> dataset.
+        </figcaption>
       </figure>
     </section>
 
