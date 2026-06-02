@@ -242,10 +242,19 @@
         // Iterate: column-1 = PIC_SCALE × bio text height. Changing column-1
         // changes column-2 width → bio wrap → bio height. Converges in a
         // few passes.
+        // Reset to the CSS column ratio for a clean starting measurement.
+        bio.style.gridTemplateColumns = '';
+        // Cap column-1: at narrow widths a wider picture shrinks the text
+        // column, which makes the text (and thus 2× its height) taller — an
+        // unbounded feedback loop that otherwise pushes the square picture
+        // past the viewport. Bounding column-1 to ≤40% of the bio width keeps
+        // it stable and on-screen (desktop sizing is well under this cap).
+        const maxCol1 = Math.floor(bio.clientWidth * 0.40);
         let last = -1;
         for (let i = 0; i < 12; i++) {
           const h = text.getBoundingClientRect().height;
-          const c = Math.round(PIC_SCALE * h);
+          let c = Math.round(PIC_SCALE * h);
+          if (c > maxCol1) c = maxCol1;
           if (Math.abs(c - last) < 2) break;
           last = c;
           bio.style.gridTemplateColumns = c + 'px 1fr';
