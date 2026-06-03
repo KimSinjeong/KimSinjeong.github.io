@@ -159,6 +159,15 @@ a:hover { text-decoration: underline; }
   color: var(--fg);
   border-color: var(--border);
 }
+/* "Coming soon" action button — faded/disabled, not clickable */
+.btn--soon {
+  background: var(--surface);
+  color: var(--fg-muted);
+  border-color: var(--border);
+  cursor: default;
+  pointer-events: none;
+}
+.btn--soon:hover { opacity: 1; transform: none; }
 
 /* ───── Section spacing & prose ───── */
 section { margin-top: 3rem; }

@@ -303,7 +303,8 @@ a:hover { text-decoration: underline; }
   aspect-ratio: 4 / 3;
   background: var(--ivory-soft);
 }
-.paper__thumb img {
+.paper__thumb img,
+.paper__thumb video {
   width: 100%;
   height: 100%;
   object-fit: cover;
